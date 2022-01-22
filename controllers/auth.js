@@ -88,11 +88,12 @@ const sendMail = async (req, res) => {
     Nếu đây không phải là email của bạn, xin hãy bỏ qua email này, hãy đừng trả lời.`;
     try {
         const user = await User.findOne({ email: req.body.email });
+
         if (req.params.slug === 'register') {
             if (user !== null) {
                 res.send(false);
             } else {
-                await sendEmail(req.body.email, 'Mã OTP:', message);
+                await se(req.body.email, 'Mã OTP:', message);
                 res.send(true);
             }
         } else if (req.params.slug === 'update' || req.params.slug === 'forgotpassword') {
@@ -100,7 +101,7 @@ const sendMail = async (req, res) => {
             res.send(true);
         }
     } catch (error) {
-        res.status(400).send('An error occured');
+        res.status(500).json(error);
     }
 };
 const login = async (req, res) => {
