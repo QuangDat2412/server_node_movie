@@ -81,10 +81,10 @@ const sendMail = async (req, res) => {
     const otp = speakeasy.totp({ secret: req.body.email + process.env.PASS_SEC, window: 19 });
     const message = `Dear ${req.body.email},
     
-    Bạn đang thực hiện xác nhận bảo mật tài khoản App, dưới đây là mã xác thực của bạn:
+    Bạn đang thực hiện xác nhận bảo mật tài khoản Movie App, dưới đây là mã xác thực của bạn:
                 
     ${otp}
-                
+               
     Nếu đây không phải là email của bạn, xin hãy bỏ qua email này, hãy đừng trả lời.`;
     try {
         const user = await User.findOne({ email: req.body.email });
